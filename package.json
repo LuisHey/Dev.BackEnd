@@ -1,0 +1,35 @@
+{
+  "name": "hostelix",
+  "version": "1.0.0",
+  "description": "Hotelaria",
+  "keywords": [
+    "back-end",
+    "ts",
+    "js",
+    "hotelaria",
+    "git-hub"
+  ],
+  "homepage": "https://github.com/LuisHey/Dev.BackEnd#readme",
+  "bugs": {
+    "url": "https://github.com/LuisHey/Dev.BackEnd/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisHey/Dev.BackEnd.git"
+  },
+  "license": "ISC",
+  "author": "Luis Hey",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/server.js",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  }
+}
