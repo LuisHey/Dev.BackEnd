@@ -1,24 +1,29 @@
 import express from "express";
+import categoryRoutes from "./routes/categoryRouter.js";
+import productRoutes from "./routes/productRouter.js";
 
 const app = express();
 
+app.use(express.json());
+
+// ==========================
+// Root
+// ==========================
 app.get("/", (req, res) => {
-    res.status(200).json({
-        message: "Hotelaria Hostelix API",
-        version: "1.0.0",
-    });
+  res.status(200).json({
+    message: "Restaurant Ordering System API",
+    version: "1.0.0",
+  });
 });
 
-app.get("/categories", (req, res) => {
-    res.status(200).json({
-        message: "Categorias",
-    });
-});
+// ==========================
+// Categories
+// ==========================
+app.use("/categories", categoryRoutes);
 
-app.get("/produts", (req, res) => {
-    res.status(200).json({
-        message: "Produtos",
-    });
-});
+// ==========================
+// Products
+// ==========================
+app.use("/products", productRoutes);
 
 export default app;
