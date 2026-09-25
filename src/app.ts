@@ -1,19 +1,29 @@
 import express from "express";
 import categoryRoutes from "./routes/categoryRouter.js";
+import productRoutes from "./routes/productRouter.js";
 
 const app = express();
 
 app.use(express.json());
 
-// Rota principal da API.
+// ==========================
+// Root
+// ==========================
 app.get("/", (req, res) => {
   res.status(200).json({
-    message: "Hotelaria Hostelix API",
+    message: "Restaurant Ordering System API",
     version: "1.0.0",
   });
 });
 
-// Todas as rotas de categorias ficam organizadas no router da funcionalidade.
+// ==========================
+// Categories
+// ==========================
 app.use("/categories", categoryRoutes);
+
+// ==========================
+// Products
+// ==========================
+app.use("/products", productRoutes);
 
 export default app;

@@ -1,19 +1,7 @@
 import supabase from "../config/supabase.js";
 
-export interface CategoryData {
-  name: string;
-  description: string;
-  icon: string;
-  display_order: number;
-  active: boolean;
-}
-
-// Busca todas as categorias cadastradas.
 async function findAll() {
-  const { data, error } = await supabase
-    .from("categories")
-    .select("*")
-    .order("display_order", { ascending: true });
+  const { data, error } = await supabase.from("categories").select("*");
 
   if (error) {
     throw error;
@@ -22,7 +10,6 @@ async function findAll() {
   return data;
 }
 
-// Busca uma categoria pelo ID.
 async function findById(id: string) {
   const { data, error } = await supabase
     .from("categories")
@@ -37,8 +24,13 @@ async function findById(id: string) {
   return data;
 }
 
-// Cria uma nova categoria.
-async function create(category: CategoryData) {
+async function create(category: {
+  name: string;
+  description: string;
+  icon: string;
+  display_order: number;
+  active: boolean;
+}) {
   const { data, error } = await supabase
     .from("categories")
     .insert(category)
@@ -52,8 +44,16 @@ async function create(category: CategoryData) {
   return data;
 }
 
-// Atualiza uma categoria existente.
-async function update(id: string, category: CategoryData) {
+async function update(
+  id: string,
+  category: {
+    name: string;
+    description: string;
+    icon: string;
+    display_order: number;
+    active: boolean;
+  },
+) {
   const { data, error } = await supabase
     .from("categories")
     .update(category)
@@ -68,7 +68,6 @@ async function update(id: string, category: CategoryData) {
   return data;
 }
 
-// Remove uma categoria pelo ID.
 async function remove(id: string) {
   const { data, error } = await supabase
     .from("categories")
@@ -84,13 +83,11 @@ async function remove(id: string) {
   return data;
 }
 
-// Pesquisa categorias pelo nome ou descrição.
 async function findByKeyword(keyword: string) {
   const { data, error } = await supabase
     .from("categories")
     .select("*")
-    .or(`name.ilike.%${keyword}%,description.ilike.%${keyword}%`)
-    .order("display_order", { ascending: true });
+    .or(`name.ilike.%${keyword}%, description.ilike.%${keyword}%`);
 
   if (error) {
     throw error;
